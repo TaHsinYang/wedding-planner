@@ -1,0 +1,16 @@
+name: Verify wedding planner
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify synchronization logic and JavaScript
+        run: |
+          npm test
+          npm run check

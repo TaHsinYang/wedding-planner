@@ -38,7 +38,7 @@ Project: `hzuzusrtphmyjmkjfhmx` (Tokyo).
 - Privileged functions live in `wedding_private`, outside the REST-exposed schema, and validate `auth.uid()` and verified email. Public RPC wrappers are security invokers. Functions have fixed empty search paths and explicitly restricted execution grants.
 - Invitations use high-entropy random tokens; the database stores only SHA-256 hashes, bound to email, expiring in 48 hours, consumed on successful join. New invitations invalidate old ones. Invite links use URL fragments and a no-referrer policy.
 - Every record's user-visible text is HTML-escaped. Imports are normalized and reject unsafe or duplicate IDs. A Content Security Policy blocks third-party scripts and objects.
-- GitHub Pages is deployed by `.github/workflows/pages.yml` on pushes to `main`, after unit and syntax checks. In repository **Settings → Pages**, choose **GitHub Actions** as the source. The uploaded artifact contains only website assets; `.nojekyll` preserves plain static serving. No application deployment secrets are needed.
+- GitHub Pages uses the existing **Deploy from a branch → main → / (root)** publishing source. GitHub runs its managed Pages deployment after a push. `.nojekyll` preserves plain static serving. `.github/workflows/check.yml` separately runs synchronization unit tests and JavaScript checks on pushes and pull requests. No application deployment secrets are needed.
 - Database schema is preserved in `database/schema.sql`; the corresponding migration is applied in Supabase. Do not rerun the bootstrap SQL on an existing populated project.
 
 ## Verification
